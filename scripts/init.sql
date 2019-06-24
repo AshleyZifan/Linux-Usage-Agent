@@ -1,4 +1,4 @@
-CREATE TABLE PUBLIC.host_info
+CREATE TABLE IF NOT EXISTS PUBLIC.host_info
 (
 id SERIAL NOT NULL,
 hostname VARCHAR NOT NULL,
@@ -13,11 +13,12 @@ CONSTRAINT host_info_pk PRIMARY KEY (id),
 CONSTRAINT host_info_un UNIQUE (hostname)
 );
 
-CREATE TABLE PUBLIC.host_usage
+
+CREATE TABLE if not exists PUBLIC.host_usage
 (
 "timestamp" TIMESTAMP NOT NULL,
 host_id SERIAL NOT NULL,
-memory)_free INT4 NOT NULL,
+memory_free INT4 NOT NULL,
 cpu_idel INT2 NOT NULL,
 cpu_kernel INT2 NOT NULL,
 disk_io INT4 NOT NULL,
