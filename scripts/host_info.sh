@@ -43,6 +43,12 @@ get_L2_cache(){
   L2_cache=$(echo $value | sed s'/K//')
 }
 
+get_total_mem(){
+total_mem_kb=$(cat /proc/meminfo | egrep "MemTotal" | awk -F':' '{print $2}' | xargs | cut -f1 -d' ')
+total_mem=$(($total_mem_kb / 1000))
+}
+
+
 #Step 1
 get_hostname
 get_cpu_number
@@ -50,7 +56,8 @@ get_cpu_architecture
 get_cpu_model
 get_cpu_mhz
 get_L2_cache
-total_mem=$(vmstat --unit M | tail -1 | awk '{print $4}')
+get_total_mem
+#total_mem=$(vmstat --unit M | tail -1 | awk '{print $4}')
 timestamp=$(date "+%Y-%m-%d %H:%M:%S")
 
 #Step 2
