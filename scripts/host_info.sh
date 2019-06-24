@@ -2,7 +2,7 @@
 
 psql_host=$1
 port=$2
-db_name=$3
+dbname=$3
 user_name=$4 
 password=$5
 
@@ -13,13 +13,13 @@ get_hostname(){
 }
 
 get_cpu_number(){
-  cpu_number=$(echo "$lscpu_out" | egrep "^CPU\(s\):" | awk '{print $2}' | xargs)
+  cpu_number=$(lscpu | egrep "^CPU\(s\):" | awk '{print $2}' | xargs)
 }
 
 #Helper function
 get_lscpu_value(){
   pattern=$1
-  value=$(echo "lscpu_out" | egrep "$pattern" | awk -F':' '{print $2}' | xargs)
+  value=$(lscpu | egrep "$pattern" | awk -F':' '{print $2}' | xargs)
   echo "value=$value"
 }
 
@@ -35,7 +35,7 @@ get_cpu_model(){
 
 get_cpu_mhz(){
   get_lscpu_value "CPU MHz:"
-  cpu_nhz=$value
+  cpu_mhz=$value
 }
 
 get_L2_cache(){

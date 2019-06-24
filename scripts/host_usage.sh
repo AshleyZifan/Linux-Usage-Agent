@@ -9,7 +9,7 @@ password=$5
 
 get_memory_free(){
 memory_free_kb=$(cat /proc/meminfo | egrep "MemFree" | awk -F':' '{print $2}' | xargs | cut -f1 -d' ')
-memory_free=$(($memory_free_kb * 0.001))
+memory_free=$(($memory_free_kb / 1000))
 }
 
 get_cpu_idel(){
@@ -38,7 +38,7 @@ get_disk_available
 
 #Step 2
 insert_stmt=$(cat <<-END
-INSERT INTO host_usage ("timestamp", host_id, memory_free, cpu_idel, cpu_kernel, disk_io, disk_available) VALUES('${timestamp}',$(cat host_id), ${memory_free}, ${cpu_idel}, ${cpu_kernel}, ${disk_io},${disk_available});
+INSERT INTO host_usage ("timestamp", host_id, memory_free, cpu_idel, cpu_kernel, disk_io, disk_available) VALUES('${timestamp}',$(cat ~/host_id), ${memory_free}, ${cpu_idel}, ${cpu_kernel}, ${disk_io},${disk_available});
 END
 )
 echo $insert_stmt
@@ -46,5 +46,5 @@ echo $insert_stmt
 #Step 3
 export PGPASSWORD=$password
 psql -h $psql_host -p $port -U $user_name -d $db_name -c "$insert_stmt"
-sleep1
+sleep 1
 
