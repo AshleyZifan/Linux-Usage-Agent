@@ -13,7 +13,7 @@ get_hostname(){
 }
 
 get_cpu_number(){
-  cpu_number=$(echo "$lscpu_out" | egrep "^CPU\(s\)::" | awk '{print $2}' | xargs)
+  cpu_number=$(echo "$lscpu_out" | egrep "^CPU\(s\):" | awk '{print $2}' | xargs)
 }
 
 #Helper function
