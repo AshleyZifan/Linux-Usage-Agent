@@ -3,7 +3,7 @@ Cluster Monitor Agent is an internal tool that monitors the cluster resources. I
 
 ## Architecture and Design
 1) 
-
+<img src="linux sql arch diagram.jpg">
 2) Tables:
    `host_info` stores the hardware specification information
    `host_usage` stores the resource usages information
