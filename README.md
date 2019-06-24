@@ -16,9 +16,7 @@ Cluster Monitor Agent is an internal tool that monitors the cluster resources. I
 3) `host_usage.sh` usage:
    `bash host_usage.sh psql_host psql_port db_name psql_user psql_password`
 4) crontab setup:
-   `crontab -e
-    ***** bash
-    host_usage.sh psql_host psql_port db_name psql_user psql_password > /tmp/host_usage.log`
+`* * * * * /home/centos/dev/jrvs/bootcamp/host_agent/scripts/host_usage.sh localhost 5432 host_agent postgres password > /tmp/host_usage.log` 
 
 ## Improvements
 1) handle hardware update
