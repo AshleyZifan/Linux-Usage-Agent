@@ -44,7 +44,7 @@ get_L2_cache(){
 }
 
 #Step 1
-get_host_name
+get_hostname
 get_cpu_number
 get_cpu_architecture
 get_cpu_model
@@ -66,7 +66,7 @@ psql -h $psql_host -p $port -U $user_name -d $dbname -c "$insert_stmt"
 sleep 1
 
 #Step 4
-host_id=`psql -h localhost -U postgres host_gent -c "select id from host_info where hostname='${hostname}'" | tail -3 | head -1 | xargs`
+host_id=`psql -h localhost -U postgres host_agent -c "select id from host_info where hostname='${hostname}'" | tail -3 | head -1 | xargs`
 echo $host_id > ~/host_id
 cat ~/host_id
 

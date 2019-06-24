@@ -21,6 +21,7 @@ cpu_kernel=$(vmstat | awk '{for(i=NF;i>0;i--)if($i=="sy"){x=i;break}}END{print $
 }
 
 get_disk_io(){
+disk_io=$(vmstat -d | awk '{for(i=NF;i>0;i--)if($i=="cur"){x=i;break}}END{print $x}')
 }
 
 get_disk_available(){
@@ -37,7 +38,7 @@ get_disk_available
 
 #Step 2
 insert_stmt=$(cat <<-END
-INSET INTO host_usage ("timestamp", host_id, memory_free, cpu_idel, cpu_kernel, disk_io, disk_available) VALUES('${timestamp}',$(cat host_id), ${memory_free}, ${cpu_idel}, ${cpu_kernel}, ${disk_io},${disk_available});
+INSERT INTO host_usage ("timestamp", host_id, memory_free, cpu_idel, cpu_kernel, disk_io, disk_available) VALUES('${timestamp}',$(cat host_id), ${memory_free}, ${cpu_idel}, ${cpu_kernel}, ${disk_io},${disk_available});
 END
 )
 echo $insert_stmt
